@@ -1,17 +1,18 @@
 {
   "name": "Robat",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Irish Discord Bot",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/soceanainn/robat.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Séamus Ó Ceanainn <seamusoceanainn@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/soceanainn/robat/issues"

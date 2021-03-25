@@ -7,9 +7,8 @@ client.on('ready', () => {
   console.log('Bot is ready');
 });
 
-client.login(process.env.BOT_TOKEN)
+client.login(process.env.BOT_TOKEN);
 
-client.on('message', (msg) => {
-  if (msg.content === '!tearma') msg.reply('Hi');
+client.on('message', (msg) => { // Test command
+  if (msg.content === 'Róbat test') msg.reply('Hi');
 });
-
