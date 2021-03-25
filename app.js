@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 require('dotenv').config();
-
+const Teasaras = require('./commands/teasaras');
 const client = new Discord.Client();
 
 client.on('ready', () => {
@@ -9,6 +9,13 @@ client.on('ready', () => {
 
 client.login(process.env.BOT_TOKEN);
 
-client.on('message', (msg) => { // Test command
-  if (msg.content === 'Róbat test') msg.reply('Hi');
+client.on('message', (msg) => {
+  message = msg.content.trim();
+  if (!message.startsWith('!') || msg.author.bot) return;
+
+  if (message === 'Róbat test')
+    return msg.reply('Hi'); // Test command
+
+  if (message.startsWith(Teasaras.prefix))
+    return Teasaras.handle(msg);
 });
