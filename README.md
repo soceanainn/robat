@@ -6,7 +6,9 @@ Róbat is a Discord bot designed to provide functionality for Irish language Dis
 
 ## Orduithe / Commands
 
-???
+| Ordú / Command    | Sonraí | Details |
+|-------------------|---|---|
+| !teasáras _abc_   | Aimsigh téarmaí gaolmhara do _'abc'_ | Find terms similar to _'abc'_|
 
 ## Contributing
 Contributions are welcome from anyone, feel free to open a PR. Please use English for all of your application code,
