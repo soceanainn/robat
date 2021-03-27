@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas').Canvas;
+const sharp = require('sharp');
 const d3 = require('d3');
 const cloud = require('d3-cloud');
 const JSDOM = require("jsdom").JSDOM;
-const svg2img = require('svg2img');
 
 const w = 960, h = 600; // Image Size
 
@@ -17,7 +17,7 @@ async function handle(message) {
         .catch(function(){ message.reply("ní féidir sean teachtaireachtaí sa chainéal seo a léamh"); });
 
     messages.map((v) => {
-       if (!v.author.bot) text += v.content + '\n';
+       if (!v.author.bot && v.type === 'DEFAULT' ) text += v.cleanContent + '\n';
     });
     parseText(text, message.channel);
 }
@@ -30,10 +30,13 @@ async function sendCloud(channel, svg){
         svg.html() +
         '</svg>';
 
-    svg2img(svgString, function(error, buffer) {
-        const attachment = new Discord.MessageAttachment(buffer, 'wordcloud.png');
-        channel.send('Wordcloud:', attachment);
-    });
+    sharp(new Buffer.from(svgString))
+        .png()
+        .toBuffer()
+        .then(data => {
+            const attachment = new Discord.MessageAttachment(data, 'wordcloud.png');
+            channel.send('Wordcloud:', attachment);
+        });
 }
 
 function parseText(text, channel) {
@@ -65,7 +68,7 @@ function generate(tags, channel) {
         .text(function(t) { return t.text})
         .on("end", function(t,e){ layout.stop(); draw(t,e, channel)});
 
-    layout.font('Impact').spiral('archimedean');
+    layout.spiral('archimedean');
     let fontSize = d3.scaleLog().range([10, 100]);
 
     tags.length && fontSize.domain([+tags[tags.length - 1].value || 1, +tags[0].value]);
