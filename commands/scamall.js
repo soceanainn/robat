@@ -17,8 +17,9 @@ async function handle(message) {
         .catch(function(){ message.reply("ní féidir sean teachtaireachtaí sa chainéal seo a léamh"); });
 
     messages.map((v) => {
-       if (!v.author.bot) text += v.content + '\n';
+       if (!v.author.bot && v.type === 'DEFAULT' ) text += v.cleanContent + '\n';
     });
+    console.log(text);
     parseText(text, message.channel);
 }
 
