@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 require('dotenv').config();
 const Teasaras = require('./commands/teasaras');
+const Scamall = require('./commands/scamall');
 const client = new Discord.Client();
 
 client.on('ready', () => {
@@ -18,4 +19,7 @@ client.on('message', (msg) => {
 
   if (message.startsWith(Teasaras.prefix))
     return Teasaras.handle(msg);
+
+  if(message.startsWith(Scamall.prefix))
+    return Scamall.handle(msg);
 });
