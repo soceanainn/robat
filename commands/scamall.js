@@ -30,7 +30,9 @@ async function sendCloud(channel, svg){
         svg.html() +
         '</svg>';
 
+    console.log(svgString);
     svg2img(svgString, function(error, buffer) {
+        console.log("ERROR: " + error);
         const attachment = new Discord.MessageAttachment(buffer, 'wordcloud.png');
         channel.send('Wordcloud:', attachment);
     });
@@ -53,7 +55,6 @@ function parseText(text, channel) {
         t.key = e[t[0]];
         t.value = t[1];
     });
-    console.log(tags);
     generate(tags, channel);
 }
 
