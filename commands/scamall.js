@@ -19,7 +19,6 @@ async function handle(message) {
     messages.map((v) => {
        if (!v.author.bot && v.type === 'DEFAULT' ) text += v.cleanContent + '\n';
     });
-    console.log(text);
     parseText(text, message.channel);
 }
 
@@ -54,6 +53,7 @@ function parseText(text, channel) {
         t.key = e[t[0]];
         t.value = t[1];
     });
+    console.log(tags);
     generate(tags, channel);
 }
 
