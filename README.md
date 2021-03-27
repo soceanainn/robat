@@ -8,7 +8,8 @@ Róbat is a Discord bot designed to provide functionality for Irish language Dis
 
 | Ordú / Command    | Sonraí | Details |
 |-------------------|---|---|
-| !teasáras _abc_   | Aimsigh téarmaí gaolmhara do _'abc'_ | Find terms similar to _'abc'_|
+| !teasáras _abc_   | Aimsigh téarmaí gaolmhara do _'abc'_ | Find terms similar to _'abc'_ |
+| !scamall          | Cruthaigh scamall focla ón 100 teachtaireacht is déanaí sa chainéal | Create a wordcloud from the latest 100 messages in the channel |
 
 ## Contributing
 Contributions are welcome from anyone, feel free to open a PR. Please use English for all of your application code,
