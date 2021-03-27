@@ -41,6 +41,9 @@ async function sendCloud(channel, svg){
             const attachment = new Discord.MessageAttachment(data, 'wordcloud.png');
             channel.send('Wordcloud:', attachment);
         });
+
+    svgFile = new Discord.MessageAttachment(new Buffer.from(svgString), 'wordcloud.svg');
+    channel.send('SVG', svgFile);
 }
 
 function parseText(text, channel) {
