@@ -68,7 +68,7 @@ function generate(tags, channel) {
         .text(function(t) { return t.text})
         .on("end", function(t,e){ layout.stop(); draw(t,e, channel)});
 
-    layout.font('impact').spiral('archimedean');
+    layout.spiral('archimedean');
     let fontSize = d3.scaleLog().range([10, 100]);
 
     tags.length && fontSize.domain([+tags[tags.length - 1].value || 1, +tags[0].value]);
