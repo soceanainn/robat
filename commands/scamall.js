@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas').Canvas;
+const sharp = require('sharp');
 const d3 = require('d3');
 const cloud = require('d3-cloud');
 const JSDOM = require("jsdom").JSDOM;
-const svg2img = require('svg2img');
 
 const w = 960, h = 600; // Image Size
 
@@ -30,12 +30,14 @@ async function sendCloud(channel, svg){
         svg.html() +
         '</svg>';
 
-    console.log(svgString);
-    svg2img(svgString, function(error, buffer) {
-        console.log("ERROR: " + error);
-        const attachment = new Discord.MessageAttachment(buffer, 'wordcloud.png');
-        channel.send('Wordcloud:', attachment);
-    });
+
+    sharp(new Buffer.from(svgString))
+        .png()
+        .toBuffer()
+        .then(data => {
+            const attachment = new Discord.MessageAttachment(data, 'wordcloud.png');
+            channel.send('Wordcloud:', attachment);
+        });
 }
 
 function parseText(text, channel) {
