@@ -30,10 +30,6 @@ async function sendCloud(channel, svg){
         svg.html() +
         '</svg>';
 
-    svgString.match(/.{1,1999}/g).forEach(value => {
-        channel.send(value);
-    });
-
     sharp(new Buffer.from(svgString))
         .png()
         .toBuffer()
@@ -41,9 +37,6 @@ async function sendCloud(channel, svg){
             const attachment = new Discord.MessageAttachment(data, 'wordcloud.png');
             channel.send('Wordcloud:', attachment);
         });
-
-    svgFile = new Discord.MessageAttachment(new Buffer.from(svgString), 'wordcloud.svg');
-    channel.send('SVG', svgFile);
 }
 
 function parseText(text, channel) {
