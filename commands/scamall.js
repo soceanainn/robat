@@ -61,7 +61,7 @@ function generate(tags, channel) {
         .canvas(function() { return new Canvas(1, 1); })
         .timeInterval(10)
         .size([w, h])
-        .fontSize(function(t) { console.log(t.value); return fontSize(+t.value)})
+        .fontSize(function(t) { return fontSize(+t.value)})
         .text(function(t) { return t.text})
         .on("end", function(t,e){ layout.stop(); draw(t,e, channel)});
 
