@@ -30,6 +30,7 @@ async function sendCloud(channel, svg){
         svg.html() +
         '</svg>';
 
+    console.log(svgString);
 
     sharp(new Buffer.from(svgString))
         .png()
