@@ -14,7 +14,7 @@ module.exports.handle = handle;
 async function handle(message) {
     let text = "";
     let messages = await message.channel.messages.fetch({limit: 100})
-        .catch(message.reply("ní féidir sean teachtaireachtaí sa chainéal seo a léamh"));
+        .catch(function(){ message.reply("ní féidir sean teachtaireachtaí sa chainéal seo a léamh"); });
 
     messages.map((v) => {
        if (!v.author.bot) text += v.content + '\n';
