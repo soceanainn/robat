@@ -3,7 +3,7 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const https = require('https');
 
-const prefix = '!foclóir';
+const prefix = '!mínigh';
 module.exports.prefix = prefix;
 module.exports.handle = handle;
 
@@ -35,7 +35,7 @@ function handle(message){
 
         });
     } catch(error) {
-        console.error("");
+        console.error("ERROR - minigh.js: " + error);
         message.reply('bhí fadhb nascadh le teanglann.ie. Bain triail eile as arís níos déanaí');
     }
 }

@@ -11,6 +11,7 @@ Róbat is a Discord bot designed to provide functionality for Irish language Dis
 | Ordú / Command    | Sonraí | Details |
 |-------------------|---|---|
 | !teasáras _abc_   | Aimsigh téarmaí gaolmhara do _'abc'_ | Find terms similar to _'abc'_ |
+| !mínigh _abc_     | Tabhair míniú ar _'abc'_ trí Ghaeilge | Explain _'abc'_ using Irish words |
 | !scamall          | Cruthaigh scamall focla ón 100 teachtaireacht is déanaí sa chainéal | Create a wordcloud from the latest 100 messages in the channel |
 
 ## Contributing
