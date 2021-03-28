@@ -36,6 +36,6 @@ function handle(message){
         });
     } catch(error) {
         console.error("ERROR - minigh.js: " + error);
-        message.reply('bhí fadhb nascadh le teanglann.ie. Bain triail eile as arís níos déanaí');
+        message.reply('bhí fadhb nascadh le teanglann.ie. Bain triail as arís níos déanaí');
     }
 }
