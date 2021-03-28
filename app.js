@@ -1,10 +1,12 @@
 require('dotenv').config();
 
 const Discord = require('discord.js');
-const Teasaras = require('./commands/teasaras');
+const client = new Discord.Client();
+
+const Aistrigh = require('./commands/aistrigh');
 const Minigh = require('./commands/minigh');
 const Scamall = require('./commands/scamall');
-const client = new Discord.Client();
+const Teasaras = require('./commands/teasaras');
 
 client.on('ready', () => {
   console.log('Róbat is ready');
@@ -25,6 +27,9 @@ client.on('message', (msg) => {
 
     if(message.startsWith(Scamall.prefix))
       return Scamall.handle(msg);
+
+    if(message.startsWith(Aistrigh.prefix))
+      return Aistrigh.handle(msg);
 
   } catch (error){
     console.error('Unhandled exception: "' + error + '" for message: "' + msg.content + '"');
