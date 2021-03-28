@@ -11,18 +11,27 @@ const prefix = '!scamall';
 module.exports.prefix = prefix;
 module.exports.handle = handle;
 
-async function handle(message) {
+async function handle(message){
     let text = "";
     let messages = await message.channel.messages.fetch({limit: 100})
-        .catch(function(){ message.reply("ní féidir sean teachtaireachtaí sa chainéal seo a léamh"); });
+        .catch(function(error){
+            console.error("ERROR - scamall.js: " + error);
+            message.reply("ní féidir sean teachtaireachtaí sa chainéal seo a léamh");
+        });
 
     messages.map((v) => {
        if (!v.author.bot && v.type === 'DEFAULT' ) text += v.cleanContent + '\n';
     });
-    parseText(text, message.channel);
+
+    try {
+        parseText(text, message.channel);
+    } catch (error){
+        console.error("ERROR - scamall.js: " + error);
+        message.reply("bhí fadhb ag próiseáil na sean teachtaireachtaí sa chainéál seo")
+    }
 }
 
-async function sendCloud(channel, svg){
+function sendCloud(channel, svg){
     const svgString = '<svg xmlns="http://www.w3.org/2000/svg" ' +
         'width="'+ w +
         '" height="' + h +
@@ -30,12 +39,12 @@ async function sendCloud(channel, svg){
         svg.html() +
         '</svg>';
 
-    sharp(new Buffer.from(svgString))
+    sharp(Buffer.from(svgString))
         .png()
         .toBuffer()
         .then(data => {
             const attachment = new Discord.MessageAttachment(data, 'wordcloud.png');
-            channel.send('Wordcloud:', attachment);
+            channel.send(attachment);
         });
 }
 
@@ -43,12 +52,14 @@ function parseText(text, channel) {
     let tags = {};
     let e = {};
     text.split(wordSeparators).forEach(function(t) {
-        discard.test(t) || (t = t.replace(punctuation, ""),
-        stopWords.test(t.toLowerCase()) || (t = t.substr(0, maxLength),
-            e[t.toLowerCase()] = t,
-            tags[t.toLowerCase()] = (tags[t.toLowerCase()] || 0) + 1))
+        if (!discard.test(t)) {
+            t = t.replace(punctuation, "");
+            if (!stopWords.test(t.toLowerCase())) t = t.substr(0, maxLength);
+            e[t.toLowerCase()] = t;
+            tags[t.toLowerCase()] = (tags[t.toLowerCase()] || 0) + 1;
+        }
     });
-    tags = Object.entries(tags).sort(function(t, e) {
+    tags = Object.entries(tags).sort(function(t, e){
         return e.value - t.value
     });
     tags.forEach(function(t) {
@@ -61,18 +72,18 @@ function parseText(text, channel) {
 
 function generate(tags, channel) {
     let layout = cloud()
-        .canvas(function() { return new Canvas(1, 1); })
+        .canvas(function(){ return new Canvas(1, 1); })
         .timeInterval(10)
         .size([w, h])
-        .fontSize(function(t) { return fontSize(+t.value)})
-        .text(function(t) { return t.text})
-        .on("end", function(t,e){ layout.stop(); draw(t,e, channel)});
+        .fontSize(function(t){ return fontSize(+t.value) })
+        .text(function(t){ return t.text })
+        .on("end", function(t,e){ layout.stop(); draw(t, e, channel) });
 
     layout.spiral('archimedean');
     let fontSize = d3.scaleLog().range([10, 100]);
 
     tags.length && fontSize.domain([+tags[tags.length - 1].value || 1, +tags[0].value]);
-    layout.stop().words(tags.slice(0, max = Math.min(tags.length, 250))).start();
+    layout.stop().words(tags.slice(0, Math.min(tags.length, 250))).start();
 }
 
 function draw(words, e, channel) {

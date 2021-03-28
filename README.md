@@ -2,15 +2,16 @@
 
 [![Add to Discord](https://raw.githubusercontent.com/soceanainn/github-badges/main/badges/discord-bot.svg)](https://discord.com/api/oauth2/authorize?client_id=824660083790315520&permissions=0&scope=bot)
 
-Fáilte! Is bota Discord é Róbat atá deartha chun feidhmiúlacht a sholáthrú do freastalaithe Discord Gaelacha.
+Fáilte! Is bota Discord é Róbat atá deartha chun feidhmiúlacht a sholáthrú do freastalaithe Discord Gaelacha. Cur Róbat le do freastalaí Discord [anseo](https://discord.com/api/oauth2/authorize?client_id=824660083790315520&permissions=0&scope=bot).
 
-Róbat is a Discord bot designed to provide functionality for Irish language Discord Servers.
+Róbat is a Discord bot designed to provide functionality for Irish language Discord Servers. Add Róbat to your Discord server [here](https://discord.com/api/oauth2/authorize?client_id=824660083790315520&permissions=0&scope=bot).
 
 ## Orduithe / Commands
 
 | Ordú / Command    | Sonraí | Details |
 |-------------------|---|---|
 | !teasáras _abc_   | Aimsigh téarmaí gaolmhara do _'abc'_ | Find terms similar to _'abc'_ |
+| !mínigh _abc_     | Tabhair míniú ar _'abc'_ trí Ghaeilge | Explain _'abc'_ using Irish words |
 | !scamall          | Cruthaigh scamall focla ón 100 teachtaireacht is déanaí sa chainéal | Create a wordcloud from the latest 100 messages in the channel |
 
 ## Contributing

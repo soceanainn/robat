@@ -9,18 +9,15 @@ module.exports.handle = handle;
 
 function handle(message) {
     const searchTerm = message.content.trim().substring(prefix.length).trim();
-    try {
-        const senseSets = db.getData("/" + searchTerm);
-        const embed = new Discord.MessageEmbed()
-            .setTitle(searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1))
-            .setURL('http://www.potafocal.com/thes/?s=' + encodeURI(searchTerm));
+    if (!db.exists("/" + searchTerm)) message.reply('níor aimsíodh aon téarmaí gaolmhara do "' + searchTerm + '"');
+    const senseSets = db.getData("/" + searchTerm);
 
-        for (meaning in senseSets) {
-            embed.addField('Brí #' + (+meaning+1), senseSets[meaning].join(", "), true)
-        }
-
-        message.channel.send(embed);
-    } catch(error) {
-        message.reply('níor aimsíodh aon téarmaí gaolmhara do "' + searchTerm + '"');
+    const embed = new Discord.MessageEmbed()
+        .setTitle(searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1))
+        .setURL('http://www.potafocal.com/thes/?s=' + encodeURI(searchTerm));
+    for (meaning in senseSets) {
+        embed.addField('Brí #' + (+meaning+1), senseSets[meaning].join(", "), true)
     }
+
+    message.channel.send(embed);
 }
