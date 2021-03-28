@@ -32,12 +32,12 @@ async function handle(message){
 }
 
 function sendCloud(channel, svg){
-    const svgString = '<svg xmlns="http://www.w3.org/2000/svg" ' +
+    const svgString = ('<svg xmlns="http://www.w3.org/2000/svg" ' +
         'width="'+ w +
         '" height="' + h +
         '" version="1.1">' +
-        svg.html().toString().replaceAll("\\", "\\\\") +
-        '</svg>';
+        svg.html() +
+        '</svg>'.replace(/\\/g, '\\\\'));
 
     sharp(Buffer.from(svgString))
         .png()
