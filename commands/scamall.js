@@ -36,7 +36,7 @@ function sendCloud(channel, svg){
         'width="'+ w +
         '" height="' + h +
         '" version="1.1">' +
-        svg.html() +
+        svg.html().toString().replaceAll("\\", "\\\\") +
         '</svg>';
 
     sharp(Buffer.from(svgString))
@@ -45,6 +45,10 @@ function sendCloud(channel, svg){
         .then(data => {
             const attachment = new Discord.MessageAttachment(data, 'wordcloud.png');
             channel.send(attachment);
+        }).catch(error => {
+            console.error("ERROR - scamall.js: " + error);
+            console.error("ERROR - scamall.js - input: " + svgString);
+            channel.send('Tá brón orm, bhí fadhb agam ag próiseáil do theactaireacht');
         });
 }
 
