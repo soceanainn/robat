@@ -59,9 +59,11 @@ function parseText(text, channel) {
     text.split(wordSeparators).forEach(function(t) {
         if (!discard.test(t)) {
             t = t.replace(punctuation, "");
-            if (!stopWords.test(t.toLowerCase())) t = t.substr(0, maxLength);
-            e[t.toLowerCase()] = t;
-            tags[t.toLowerCase()] = (tags[t.toLowerCase()] || 0) + 1;
+            if (!stopWords.test(t.toLowerCase())) {
+                t = t.substr(0, maxLength);
+                e[t.toLowerCase()] = t;
+                tags[t.toLowerCase()] = (tags[t.toLowerCase()] || 0) + 1;
+            }
         }
     });
     tags = Object.entries(tags).sort(function(t, e){
@@ -159,7 +161,7 @@ const stopWords = new RegExp('^(i|me|my|myself|self|' +
     'suas|thuas|anuas|síos|thíos|aníos|faide|ansin|anseo|ansiúd|' +
     'all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|say|says|said|shall|' +
     'gach|aon|dhá|níos|mó|lú|eile|roinnt|ní|níl|ea|hea|t-aon|céanna|mar|ná|abair|rá|arsa|dúirt|' +
-    "i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's)$/");
+    "i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's)$");
 
 const punctuation = new RegExp("[" + unicodePunctuationRe + "]","g");
 const wordSeparators = /[ \f\n\r\t\v\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000\u3031-\u3035\u309b\u309c\u30a0\u30fc\uff70]+/g;
